@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +16,8 @@ public class Società {
 	@Column
 	private String ragioneSociale;
 	private String numeroTelefonico;
-	
-	@OneToOne
+	// è utile aggiornare o cancellare l'indirzzo di socità in caso di fallimento o cambio indirzzo
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
 	private Indirizzo indirizzo;
 
 	public Long getId() {

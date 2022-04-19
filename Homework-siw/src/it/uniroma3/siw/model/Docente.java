@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +22,8 @@ public class Docente {
 	private String dataDiNascita;
 	private String partitaIVA;
 	
-	
-	@OneToMany(mappedBy = "docenti")
+	// è utile aggiornare o cancellare i corsi in caso di cambio di docente e avere persistenti i corsi collegati al docente
+	@OneToMany(mappedBy = "docenti", cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE}) 
 	private List<Corso> corsi;
 
 
